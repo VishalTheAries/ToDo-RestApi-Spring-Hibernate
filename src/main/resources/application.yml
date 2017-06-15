@@ -3,4 +3,7 @@ spring.datasource:
     url: jdbc:h2:mem:bootexample;MODE=MySQL
 
 server:
-  port: 8080
+  port: 9090
+  
+spring.jpa:
+  hibernate.ddl-auto: create-drop 
