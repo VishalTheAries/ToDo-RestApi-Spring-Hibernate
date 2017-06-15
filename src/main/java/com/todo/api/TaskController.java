@@ -3,10 +3,15 @@ package com.todo.api;
 import org.springframework.web.bind.annotation.*;
 import com.todo.models.Task;
 import org.springframework.http.HttpStatus;
+
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.todo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.todo.exception.ResourceNotFoundException;
 
 @RestController
@@ -17,6 +22,8 @@ public class TaskController {
 	@Autowired
     private TaskService taskService;
     
+	
+	
     @RequestMapping(value = "",
             method = RequestMethod.POST,
             consumes = {"application/json"},
@@ -35,7 +42,9 @@ public class TaskController {
     @ResponseStatus(HttpStatus.OK)
     public
     @ResponseBody
-    Iterable<Task> getAllTask(HttpServletRequest request, HttpServletResponse response) {
+    Iterable<Task> getAllTask(
+    			HttpServletRequest request, HttpServletResponse response) {
+//    	System.out.print(date);
         return this.taskService.getAllTasks();			
     }
     
@@ -72,6 +81,17 @@ public class TaskController {
                                  HttpServletResponse response) {
         checkResourceFound(this.taskService.getTask(id));
         this.taskService.deleteTask(id);
+    }
+
+    @RequestMapping(value = "/date",
+            method = RequestMethod.POST,
+            consumes = {"application/json"},
+            produces = {"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<Task> getTasksforDate(@RequestParam(value = "date", required = false) @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") Date date,
+            HttpServletRequest request, HttpServletResponse response) {
+    		System.out.print(date);
+    		return this.taskService.getTasksforDate(date);
     }
     
     public static <T> T checkResourceFound(final T resource) {

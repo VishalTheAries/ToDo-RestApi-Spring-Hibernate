@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task,Long>{
-//    Task findTaskByDate(Date date);
+    Iterable<Task> findTaskByDate(Date date);
 }

@@ -6,4 +6,7 @@ server:
   port: 9090
   
 spring.jpa:
-  hibernate.ddl-auto: create-drop 
+  hibernate.ddl-auto: create-drop
+
+spring.jackson:
+  serialization.write-dates-as-timestamps: false 

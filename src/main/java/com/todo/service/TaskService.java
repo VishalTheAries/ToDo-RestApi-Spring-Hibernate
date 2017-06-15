@@ -3,6 +3,9 @@ package com.todo.service;
 import com.todo.models.Task;
 import com.todo.dao.jpa.TaskRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
@@ -36,6 +39,11 @@ public class TaskService {
 
     public Iterable<Task> getAllTasks() {
     	Iterable pageOfTask = taskRepository.findAll();
+        return pageOfTask;
+    }
+
+    public Iterable<Task> getTasksforDate(Date date) {
+    	Iterable pageOfTask = taskRepository.findTaskByDate(date);
         return pageOfTask;
     }
     
