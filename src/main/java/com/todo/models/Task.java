@@ -2,7 +2,7 @@ package com.todo.models;
 
 import java.util.Date;
 import javax.persistence.*;
-
+import java.text.SimpleDateFormat;  
 /*
  * a persistant class using jda-hibernate annotations
  */
@@ -18,15 +18,17 @@ public class Task {
     @Column()
     private String description;
     
-    @Column()
-    private Date date;
+//    @Column()
+//    private Date date;
 
     public Task() {
     }
 
-    public Task(String description, Date date) {
+    public Task(String description) {
         this.description = description;
-        this.date = date;
+//        DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+//        Date startDate = df.parse(startDate);
+//        this.date = date;
     }
     
     public long getId() {
@@ -37,13 +39,13 @@ public class Task {
         return description;
     }
     
-    public Date getDate() {
-        return date;
-    }
+//    public Date getDate() {
+//        return date;
+//    }
     
-    public void setDate(Date date) {
-        this.date = date;
-    }
+//    public void setDate(Date date) {
+//        this.date = date;
+//    }
     
     public void setDescription(String description) {
         this.description = description;
@@ -54,7 +56,7 @@ public class Task {
         return "Task {" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", rating=" + date +
+//                ", date=" + date +
                 '}';
     }
 }
