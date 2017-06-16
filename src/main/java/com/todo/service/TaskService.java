@@ -4,7 +4,10 @@ import com.todo.models.Task;
 import com.todo.dao.jpa.TaskRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,8 +45,8 @@ public class TaskService {
         return pageOfTask;
     }
 
-    public Iterable<Task> getTasksforDate(Date date) {
-    	Iterable pageOfTask = taskRepository.findTaskByDate(date);
+    public Iterable<Task> getTasksforDate(LocalDate date) {
+    	Iterable<Task> pageOfTask = taskRepository.findTaskByDate(date);
         return pageOfTask;
     }
     

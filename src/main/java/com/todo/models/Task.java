@@ -1,8 +1,11 @@
 package com.todo.models;
 
-import java.util.Date;
+import java.time.LocalDate;
+import com.todo.serializer.*;
 import javax.persistence.*;
-import com.fasterxml.jackson.annotation.JsonFormat;;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 /*
  * a persistant class using jda-hibernate annotations
  */
@@ -18,16 +21,19 @@ public class Task {
     @Column()
     private String description;
     
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @Column()
-    private Date date;
+    private LocalDate date;
 
     public Task() {
     }
 
-    public Task(String description,Date date) {
+    public Task(String description,LocalDate date) {
         this.description = description;
         this.date = date;
+        System.out.println(this.date);
     }
     
     public long getId() {
@@ -38,11 +44,11 @@ public class Task {
         return description;
     }
     
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
     
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
     

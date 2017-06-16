@@ -5,13 +5,14 @@ import com.todo.models.Task;
 import org.springframework.http.HttpStatus;
 
 import java.util.Date;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.todo.service.TaskService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.todo.exception.ResourceNotFoundException;
 
 @RestController
@@ -22,7 +23,6 @@ public class TaskController {
 	@Autowired
     private TaskService taskService;
     
-	
 	
     @RequestMapping(value = "",
             method = RequestMethod.POST,
@@ -42,9 +42,19 @@ public class TaskController {
     @ResponseStatus(HttpStatus.OK)
     public
     @ResponseBody
-    Iterable<Task> getAllTask(
+    Iterable<Task> getAllTask(@RequestParam(value = "date", required = false) String dateparam,
     			HttpServletRequest request, HttpServletResponse response) {
-//    	System.out.print(date);
+    	System.out.println(dateparam);
+    	if(dateparam != null){
+    		try{
+	    		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+	    		LocalDate localdateparam = LocalDate.parse(dateparam, formatter);
+	    		System.out.println(localdateparam);
+	    		return this.taskService.getTasksforDate(localdateparam);
+    		}catch(Exception e){
+    			throw new RuntimeException("Invalid Date format");
+    		}
+    	}
         return this.taskService.getAllTasks();			
     }
     
@@ -83,17 +93,6 @@ public class TaskController {
         this.taskService.deleteTask(id);
     }
 
-    @RequestMapping(value = "/date",
-            method = RequestMethod.POST,
-            consumes = {"application/json"},
-            produces = {"application/json"})
-    @ResponseStatus(HttpStatus.OK)
-    public Iterable<Task> getTasksforDate(@RequestParam(value = "date", required = false) @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") Date date,
-            HttpServletRequest request, HttpServletResponse response) {
-    		System.out.print(date);
-    		return this.taskService.getTasksforDate(date);
-    }
-    
     public static <T> T checkResourceFound(final T resource) {
         if (resource == null) {
             throw new ResourceNotFoundException();
