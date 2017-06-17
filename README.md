@@ -48,10 +48,15 @@ Location header: http://localhost:9090/todo/task/1
 `Accept: application/json`<br/>
 `Content-Type: application/json`<br/>
 ```
+{
+"id":1,
+"description" : "text",
+"date" : "2017-06-17"
+}
 RESPONSE: HTTP 204 (No Content)
 ```
 ### Using curl:
-    curl -d '{"id":1,"description":"bbbb", "date":"1993-04-15"}' -H "Content-Type: application/json" -X PUT http://localhost:9090/todo/task/1
+    curl -d '{"id":1,"description":"text", "date":"2017-06-17"}' -H "Content-Type: application/json" -X PUT http://localhost:9090/todo/task/1
 
 ## GET single task resource
 `GET /todo/task/{id}`<br/>
@@ -86,7 +91,7 @@ Content-Type: application/json;charset=UTF-8
 [{"id":1,"description":"text","date":"2017-06-17"}]
 ```
 ### Using curl:
-	curl http://localhost:9090/todo/task?date=1993-04-15
+	curl http://localhost:9090/todo/task?date=2017-06-17
 
 ## Delete a specific task resource
 `DELETE /todo/task/{id}`
