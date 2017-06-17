@@ -56,6 +56,10 @@ public class Task {
         this.description = description;
     }
     
+    public void setId(Long id) {
+        this.id= id;
+    }
+    
     @Override
     public String toString() {
         return "Task {" +
