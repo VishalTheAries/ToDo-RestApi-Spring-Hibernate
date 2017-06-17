@@ -1,0 +1,8 @@
+com/todo/ToDoApplication.class
+com/todo/api/TaskController.class
+com/todo/serializer/LocalDateDeserializer.class
+com/todo/service/TaskService.class
+com/todo/dao/jpa/TaskRepository.class
+com/todo/serializer/LocalDateSerializer.class
+com/todo/models/Task.class
+com/todo/exception/ResourceNotFoundException.class
