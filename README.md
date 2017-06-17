@@ -13,11 +13,11 @@ or build using maven
 
 ### Features:
 
-**1.** Add new task for a certain date.
-**2.** Get all task for certain date.
-**3.** Get each task individually.
-**4.** Update task.
-**5.** Delete each task.
+**1.** Add new task for a certain date.<br/>
+**2.** Get all task for certain date.<br/>
+**3.** Get each task individually.<br/>
+**4.** Update task.<br/>
+**5.** Delete each task.<br/>
 
 ## Here is what this little application demonstrates:
 
@@ -27,9 +27,9 @@ or build using maven
 4. Automatic CRUD functionality against the data source using JPA Repository pattern
 
 ### Create a task resource
-`POST /todo/task`
-`Accept: application/json`
-`Content-Type: application/json`
+`POST /todo/task`<br/>
+`Accept: application/json`<br/>
+`Content-Type: application/json`<br/>
 ```
 {
 "description" : "text",
@@ -44,9 +44,9 @@ Location header: http://localhost:9090/todo/task/1
 
 ## Update a task resource
 
-`PUT /todo/task/{id}`
-`Accept: application/json`
-`Content-Type: application/json`
+`PUT /todo/task/{id}`<br/>
+`Accept: application/json`<br/>
+`Content-Type: application/json`<br/>
 ```
 RESPONSE: HTTP 204 (No Content)
 ```
@@ -54,8 +54,8 @@ RESPONSE: HTTP 204 (No Content)
     curl -d '{"id":1,"description":"bbbb", "date":"1993-04-15"}' -H "Content-Type: application/json" -X PUT http://localhost:9090/todo/task/1
 
 ## GET single task resource
-`GET /todo/task/{id}`
-`Accept: application/json`
+`GET /todo/task/{id}`<br/>
+`Accept: application/json`<br/>
 
 ```
 Response:
@@ -66,8 +66,8 @@ Content-Type: application/json;charset=UTF-8
 	curl http://localhost:9090/todo/task/1
 	
 ## GET all task resource
-`GET /todo/task`
-`Accept: application/json`
+`GET /todo/task`<br/>
+`Accept: application/json`<br/>
 ```
 Response:
 Content-Type: application/json;charset=UTF-8
@@ -77,8 +77,8 @@ Content-Type: application/json;charset=UTF-8
 	curl http://localhost:9090/todo/task
 	
 ## GET all task resource for specific date
-`GET /todo/task?date=yyyy-mm-dd`
-`Accept: application/json`
+`GET /todo/task?date=yyyy-mm-dd`<br/>
+`Accept: application/json`<br/>
 
 ```
 Response:
