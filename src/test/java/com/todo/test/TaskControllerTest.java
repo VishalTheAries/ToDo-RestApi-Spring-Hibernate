@@ -29,14 +29,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = ToDoApplication.class)
 public class TaskControllerTest {
 
 	
-	private static final String RESOURCE_LOCATION_PATTERN = "http://localhost:9090/todo/task/[0-9]+";
+	private static final String RESOURCE_LOCATION_PATTERN = "http://localhost/todo/task//?[0-9]+";
 	
     @InjectMocks
     TaskController controller;
@@ -53,7 +55,7 @@ public class TaskControllerTest {
     }	
     
     @Test
-    public void testCreateandUpdate() throws Exception {
+    public void testCRUDoperation() throws Exception {
         Task r1 = mockTask("shouldCreate");
         byte[] r1Json = toJson(r1);
 
@@ -63,22 +65,32 @@ public class TaskControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
-                .andExpect(redirectedUrlPattern(RESOURCE_LOCATION_PATTERN))
                 .andReturn();
         
         long id = getResourceIdFromUrl(result.getResponse().getRedirectedUrl());
+
+        //RETRIEVE
+        mvc.perform(get("/todo/task/" + id)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is((int) id)))
+                .andExpect(jsonPath("$.description", is(r1.getDescription())));
         
         Task r2 = mockTask("shouldUpdate");
         r2.setId(id);
         byte[] r2Json = toJson(r2);
 
         //UPDATE
-        result = mvc.perform(put("/todo/task" + id)
+        result = mvc.perform(put("/todo/task/" + id)
                 .content(r2Json)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent())
                 .andReturn();
+
+        //DELETE
+        mvc.perform(delete("/todo/task/" + id))
+        	.andExpect(status().isNoContent());
     }
 
     @Test
