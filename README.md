@@ -1,5 +1,5 @@
 # ToDo-RestApi-Spring-Hibernate
-Application runs on port 9090
+Application runs on port 9090, change port in application.yml file and rebuild the package using maven
 
 ### Download the 'fat' jar file from here [here](https://github.com/VishalTheAries/ToDo-RestApi-Spring-Hibernate/blob/master/target/todo-application-0.0.1-SNAPSHOT.jar)
 
