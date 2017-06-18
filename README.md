@@ -63,7 +63,7 @@ RESPONSE: HTTP 204 (No Content)
 `Accept: application/json`<br/>
 
 ```
-Response:
+Response: 200 (OK)
 Content-Type: application/json;charset=UTF-8
 {"id":1,"description":"text","date":"2017-06-17"}
 ```
@@ -74,7 +74,7 @@ Content-Type: application/json;charset=UTF-8
 `GET /todo/task`<br/>
 `Accept: application/json`<br/>
 ```
-Response:
+Response: 200 (OK)
 Content-Type: application/json;charset=UTF-8
 [{"id":1,"description":"text","date":"2017-06-17"}]
 ```
@@ -86,7 +86,7 @@ Content-Type: application/json;charset=UTF-8
 `Accept: application/json`<br/>
 
 ```
-Response:
+Response: 200 (OK)
 Content-Type: application/json;charset=UTF-8
 [{"id":1,"description":"text","date":"2017-06-17"}]
 ```
